@@ -8,17 +8,34 @@ function App() {
   /*Variables*/
 
   /*Variables de estado*/
-
+  const [newClub, setNewClub] = useState('');
   /*Funciones*/
+  const handleAddClub = (ev) => {
+    setNewClub(ev.currentTarget.value);
+  };
+  const handleWeekdays = (ev) => {
+    setNewClub(ev.currentTarget.checked);
+  };
+  const handleWeekends = (ev) => {
+    setNewClub(ev.currentTarget.checked);
+  };
+  const handleClick = (ev) => {
+    data.push(newClub);
+    const newClub = {
+      name: ev.currentTarget.value,
+    };
+    const newWeekday = {ev.currentTarget.checked };
+    const newWeekend = {ev.currentTarget.checked };
+  };
 
   const htmlClubList = data.map((club, index) => (
     <li className='club'>
       <h2 className='name'>{club.name}</h2>
       <label className='weekdays'>
-        Abierto entre semana:{club.openOnWeekdays}
+        Abierto entre semana:{club.openOnWeekdays === true ? ' Sí' : ' No'}
       </label>
       <label className='weekends'>
-        Abierto el fin de semana:{club.openOnWeekend}
+        Abierto el fin de semana:{club.openOnWeekends === true ? ' Sí' : ' No'}
       </label>
     </li>
   ));
@@ -39,24 +56,42 @@ function App() {
       <main className='header'>
         <ul className='list'>{htmlClubList}</ul>
         <form className='form2'>
-          <h2>Añadir un nuevo club</h2>
-          <label>
+          <h2 class='add'>Añadir un nuevo club</h2>
+          <label className='addname'>
             Nombre del club
             <input
               type='text'
-              className='textarea'
+              className='addtext'
               name='description'
-              value=''
+              value={newClub}
+              onChange={handleAddClub}
             />
           </label>
-          <label>
+          <label className='openweekday'>
             ¿Abre entre semana?
-            <input type='checkbox'></input>
+            {
+              <input
+                type='checkbox'
+                checked={newWeekday}
+                onClick={handleWeekdays}
+              ></input>
+            }
           </label>
-          <label>
+          <label className='openweekend'>
             ¿Abre el fin de semana?
-            <input type='checkbox'></input>
+            <input
+              type='checkbox'
+              checked={newWeekend}
+              onClick={handleWeekends}
+            ></input>
           </label>
+          <input
+            type='button'
+            class='button'
+            name='button'
+            value='Añadir'
+            onClick={handleClick}
+          />
         </form>
       </main>
     </>
@@ -64,86 +99,3 @@ function App() {
 }
 
 export default App;
-
-//
-//
-//function App() {
-//  /*Variables*/
-//
-//  /*Varibles de estado */
-//  const [color, setColor] = useState('');
-//  const [player, setPlayer] = useState('');
-//  /*Funciones*/
-//  const handleColor = (ev) => {
-//    setColor(ev.target.value);
-//  };
-//  const handlePlayer = (event) => {
-//    setPlayer(event.target.value);
-//  };
-//
-//  return (
-//    <>
-//      <div className='App'>
-//        <h1 className={color}>Adivina el número</h1>
-//        <form action='' method='GET' className='form'>
-//          <label className='body__form--label' for='number'>
-//            Introduce aquí tu número:
-//          </label>
-//          <input className='js-number form--number' type='number' />
-//          <input
-//            className='js-button form--button'
-//            type='button'
-//            value='Prueba'
-//          />
-//          <p className='js-clue form--clue'>
-//            Pista: Escribe el numero y dale a Prueba.
-//          </p>
-//          <input className='js-tries form--count' type='text' name='count' />
-//        </form>
-//        <form>
-//          <input
-//            type='text'
-//            name='player'
-//            className='player'
-//            placeholder='Player Name'
-//            onKeyUp={handlePlayer}
-//          />
-//          <select name='select' className='select' onChange={handleColor}>
-//            <option value='select'>Select</option>
-//            <option value='pink'>Pink</option>
-//            <option value='blue'>Blue</option>
-//            <option value='purple'>Purple</option>
-//          </select>
-//        </form>
-//        <small>{player}</small>
-//      </div>
-//      <form className='form-movies'>
-//        <label>
-//          <input
-//            type='text'
-//            name='name'
-//            placeholder='Título de videjuego' /*onChange={handeTitle}*/
-//          ></input>
-//        </label>
-//        <label>
-//          Descripción
-//          <textarea className='textarea' name='description' value='' />
-//        </label>
-//
-//        <label>
-//          Idioma
-//          <select name='language' className='language' onChange={handleColor}>
-//            <option value='es'>Español</option>
-//            <option value='en'>Inglés</option>
-//            <option value='pt'>Portugués</option>
-//          </select>
-//        </label>
-//      </form>
-//    </>
-//  );
-//}
-//
-//export default App;
-//
-//
-//
