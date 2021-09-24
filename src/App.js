@@ -1,31 +1,36 @@
 import './App.js';
 import './App.scss';
 import React, { useState } from 'react';
-import data from './clubs.json';
-console.log(data);
+import info from './clubs.json';
 
 function App() {
   /*Variables*/
 
   /*Variables de estado*/
+  const [data, setData] = useState(info);
   const [newClub, setNewClub] = useState('');
+  const [newName, setNewName] = useState('');
+  const [newWeekday, setNewWeekday] = useState('');
+  const [newWeekend, setNewWeekend] = useState('');
   /*Funciones*/
   const handleAddClub = (ev) => {
-    setNewClub(ev.currentTarget.value);
+    setNewName(ev.currentTarget.value);
   };
   const handleWeekdays = (ev) => {
-    setNewClub(ev.currentTarget.checked);
+    setNewWeekday(ev.currentTarget.checked);
   };
   const handleWeekends = (ev) => {
-    setNewClub(ev.currentTarget.checked);
+    setNewWeekend(ev.currentTarget.checked);
   };
   const handleClick = (ev) => {
-    data.push(newClub);
     const newClub = {
-      name: ev.currentTarget.value,
+      name: newName,
+      newWeekday: newWeekday,
+      newWeekend: newWeekend,
     };
-    const newWeekday = {ev.currentTarget.checked };
-    const newWeekend = {ev.currentTarget.checked };
+
+    data.push(newClub);
+    setData([...data]);
   };
 
   const htmlClubList = data.map((club, index) => (
@@ -63,7 +68,7 @@ function App() {
               type='text'
               className='addtext'
               name='description'
-              value={newClub}
+              value={newName}
               onChange={handleAddClub}
             />
           </label>
