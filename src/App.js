@@ -37,10 +37,10 @@ function App() {
     <li className='club'>
       <h2 className='name'>{club.name}</h2>
       <label className='weekdays'>
-        Abierto entre semana:{club.openOnWeekdays === true ? ' Sí' : ' No'}
+        Abierto entre semana:{club.openOnWeekdays === false ? ' Sí' : ' No'}
       </label>
       <label className='weekends'>
-        Abierto el fin de semana:{club.openOnWeekends === true ? ' Sí' : ' No'}
+        Abierto el fin de semana:{club.openOnWeekends === false ? ' Sí' : ' No'}
       </label>
     </li>
   ));
